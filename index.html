@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Real-Time Updates</title>
+</head>
+<body>
+    <h1>Real-Time Updates</h1>
+    
+    <ul id="data-list">
+        <!-- Data will be displayed here -->
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+    <script>
+        // Define the Redis keys you want to monitor
+        const keysToMonitor = ['data', 'master', 'key3'];
+
+        // Create an object to store the previous data for each key
+        const previousData = {};
+
+        // Connect to the Socket.IO server
+        const socket = io.connect('http://localhost:3000');
+
+        // Listen for updates on each key
+        keysToMonitor.forEach((key) => {
+            socket.on(`dataUpdate_${key}`, (updatedData) => {
+                if (updatedData !== previousData[key]) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Received UpdateData for key '${key}': ${updatedData}`;
+                    document.getElementById('data-list').appendChild(listItem);
+
+                    previousData[key] = updatedData;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+    "name": "realsync",
+    "version": "1.0.0",
+    "description": "SocketIO Implementation to connect with Redis",
+    "main": "socketServer.js",
+    "scripts": {
+        "start": "node socketServer.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "http": "0.0.1-security",
+        "ioredis": "^4.28.5",
+        "mysql": "^2.18.1",
+        "redis": "^3.0.504",
+        "socket.io": "^4.7.2"
+    },
+    "author": "Sanjay",
+    "license": "MIT"
+}
